@@ -26,6 +26,6 @@ public class DefaultPremiumCalculator implements PremiumCalculator {
                 new BigDecimal("0.05") : new BigDecimal("0.11");
         BigDecimal premiumTheft = sumInsuredTheft.multiply(premiumTheftCoefficient);
 
-        return premiumFire.add(premiumTheft);
+        return premiumFire.add(premiumTheft).setScale(2, RoundingMode.HALF_UP);
     }
 }

@@ -2,7 +2,9 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class PremiumCalculatorTests {
 
@@ -17,7 +19,7 @@ public class PremiumCalculatorTests {
 
         BigDecimal calculatedPremium = calculator.calculate(policy);
 
-        assertEquals(0, calculatedPremium.compareTo(new BigDecimal("2.28")));
+        assertThat(calculatedPremium, is(equalTo(new BigDecimal("2.28"))));
     }
 
     @Test
@@ -35,6 +37,6 @@ public class PremiumCalculatorTests {
 
         BigDecimal calculatedPremium = calculator.calculate(policy);
 
-        assertEquals(0, calculatedPremium.compareTo(new BigDecimal("17.13")));
+        assertThat(calculatedPremium, is(equalTo(new BigDecimal("17.13"))));
     }
 }

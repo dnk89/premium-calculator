@@ -10,22 +10,26 @@ import static org.hamcrest.Matchers.is;
 public class PremiumCalculatorTests {
 
     private Policy.Builder policyBuilder;
+    private PolicyObject.Builder objectBuilder;
 
     @BeforeEach
     public void init() {
         policyBuilder = new Policy.Builder();
+        objectBuilder = new PolicyObject.Builder();
     }
 
     @Test
     public void policy_with_one_object_and_two_sub_objects_criteria() {
         PremiumCalculator calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
-        PolicyObject policyObject = new PolicyObject("House");
-        policyObject.addItem(new PolicyObjectItem("TV", new BigDecimal("100.00"), RiskType.FIRE));
-        policyObject.addItem(new PolicyObjectItem("Refrigerator", new BigDecimal("8.00"), RiskType.THEFT));
+        PolicyObject house = objectBuilder
+                .withName("House")
+                .withItem(new PolicyObjectItem("TV", new BigDecimal("100.00"), RiskType.FIRE))
+                .withItem(new PolicyObjectItem("Refrigerator", new BigDecimal("8.00"), RiskType.THEFT))
+                .build();
         Policy policy = policyBuilder
                 .withNumber("LV20-02-100000-5")
                 .withStatus(PolicyStatus.REGISTERED)
-                .withObject(policyObject)
+                .withObject(house)
                 .build();
 
         BigDecimal calculatedPremium = calculator.calculate(policy);
@@ -36,12 +40,17 @@ public class PremiumCalculatorTests {
     @Test
     public void policy_with_total_sums_criteria() {
         PremiumCalculator calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
-        PolicyObject house = new PolicyObject("House");
-        house.addItem(new PolicyObjectItem("TV", new BigDecimal("104.45"), RiskType.FIRE));
-        house.addItem(new PolicyObjectItem("Blender", new BigDecimal("8.06"), RiskType.THEFT));
-        PolicyObject garage = new PolicyObject("Garage");
-        garage.addItem(new PolicyObjectItem("Bicycle", new BigDecimal("395.55"), RiskType.FIRE));
-        garage.addItem(new PolicyObjectItem("Chainsaw", new BigDecimal("94.45"), RiskType.THEFT));
+        PolicyObject house = objectBuilder
+                .withName("House")
+                .withItem(new PolicyObjectItem("TV", new BigDecimal("104.45"), RiskType.FIRE))
+                .withItem(new PolicyObjectItem("Blender", new BigDecimal("8.06"), RiskType.THEFT))
+                .build();
+        PolicyObject garage = objectBuilder
+                .reset()
+                .withName("Garage")
+                .withItem(new PolicyObjectItem("Bicycle", new BigDecimal("395.55"), RiskType.FIRE))
+                .withItem(new PolicyObjectItem("Chainsaw", new BigDecimal("94.45"), RiskType.THEFT))
+                .build();
         Policy policy = policyBuilder
                 .withNumber("LV20-02-100000-5")
                 .withStatus(PolicyStatus.REGISTERED)

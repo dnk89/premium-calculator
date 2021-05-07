@@ -13,7 +13,7 @@ public class TotalPremiumCalculator implements PremiumCalculator {
     @Override
     public BigDecimal calculate(Policy policy) {
         return Stream.of(RiskType.values())
-                .map(t -> calculateForRiskType(t, policy))
+                .map(riskType -> calculateForRiskType(riskType, policy))
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .setScale(2, RoundingMode.HALF_UP);
     }

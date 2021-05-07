@@ -12,11 +12,16 @@ public class TotalPremiumCalculator implements PremiumCalculator {
 
     @Override
     public BigDecimal calculate(Policy policy) {
+        return calculateForAllRiskTypes(policy);
+    }
+
+    private BigDecimal calculateForAllRiskTypes(Policy policy) {
         return Stream.of(RiskType.values())
                 .map(riskType -> calculateForRiskType(riskType, policy))
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .setScale(2, RoundingMode.HALF_UP);
     }
+
 
     private BigDecimal calculateForRiskType(RiskType riskType, Policy policy) {
         return concreteRiskPremiumCalculatorFactory.getConcreteRiskPremiumCalculatorFor(riskType).calculate(policy);

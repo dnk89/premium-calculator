@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.stream.Stream;
 
 public class TotalPremiumCalculator implements PremiumCalculator {
 
@@ -11,12 +12,13 @@ public class TotalPremiumCalculator implements PremiumCalculator {
 
     @Override
     public BigDecimal calculate(Policy policy) {
-        BigDecimal totalPremium = BigDecimal.ZERO;
-        for (RiskType riskType : RiskType.values()) {
-            PremiumCalculator concreteRiskPremiumCalculator = concreteRiskPremiumCalculatorFactory.getConcreteRiskPremiumCalculatorFor(riskType);
-            BigDecimal concreteRiskPremium = concreteRiskPremiumCalculator.calculate(policy);
-            totalPremium = totalPremium.add(concreteRiskPremium);
-        }
-        return totalPremium.setScale(2, RoundingMode.HALF_UP);
+        return Stream.of(RiskType.values())
+                .map(t -> calculateForRiskType(t, policy))
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private BigDecimal calculateForRiskType(RiskType riskType, Policy policy) {
+        return concreteRiskPremiumCalculatorFactory.getConcreteRiskPremiumCalculatorFor(riskType).calculate(policy);
     }
 }

@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +26,7 @@ public class PolicyObject {
 
         private String name;
         private List<PolicyObjectItem> items = new ArrayList<>();
+        private final PolicyObjectItem.Builder itemBuilder = new PolicyObjectItem.Builder();
 
         public Builder withName(String name) {
             this.name = name;
@@ -34,6 +36,22 @@ public class PolicyObject {
         public Builder withItem(PolicyObjectItem item) {
             items.add(item);
             return this;
+        }
+
+        public Builder withFireRiskItem(String name, BigDecimal sumInsured) {
+            return withItem(itemBuilder.reset()
+                    .withRiskType(RiskType.FIRE)
+                    .withName(name)
+                    .withSumInsured(sumInsured)
+                    .build());
+        }
+
+        public Builder withTheftRiskItem(String name, BigDecimal sumInsured) {
+            return withItem(itemBuilder.reset()
+                    .withRiskType(RiskType.THEFT)
+                    .withName(name)
+                    .withSumInsured(sumInsured)
+                    .build());
         }
 
         public Builder reset() {

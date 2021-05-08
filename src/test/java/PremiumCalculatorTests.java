@@ -11,38 +11,24 @@ public class PremiumCalculatorTests {
 
     private Policy.Builder policyBuilder;
     private PolicyObject.Builder objectBuilder;
-    private PolicyObjectItem.Builder itemBuilder;
 
     @BeforeEach
     public void init() {
         policyBuilder = new Policy.Builder();
         objectBuilder = new PolicyObject.Builder();
-        itemBuilder = new PolicyObjectItem.Builder();
     }
 
     @Test
     public void policy_with_one_object_and_two_sub_objects_criteria() {
         PremiumCalculator calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
-        PolicyObjectItem tv = itemBuilder
-                .withName("TV")
-                .withSumInsured(new BigDecimal("100.00"))
-                .withRiskType(RiskType.FIRE)
-                .build();
-        PolicyObjectItem refrigerator = itemBuilder
-                .reset()
-                .withName("Refrigerator")
-                .withSumInsured(new BigDecimal("8.00"))
-                .withRiskType(RiskType.THEFT)
-                .build();
-        PolicyObject house = objectBuilder
-                .withName("House")
-                .withItem(tv)
-                .withItem(refrigerator)
-                .build();
         Policy policy = policyBuilder
                 .withNumber("LV20-02-100000-5")
                 .withStatus(PolicyStatus.REGISTERED)
-                .withObject(house)
+                .withObject(objectBuilder
+                        .withName("House")
+                        .withFireRiskItem("TV", new BigDecimal("100.00"))
+                        .withTheftRiskItem("Refrigerator", new BigDecimal("8.00"))
+                        .build())
                 .build();
 
         BigDecimal calculatedPremium = calculator.calculate(policy);
@@ -53,45 +39,19 @@ public class PremiumCalculatorTests {
     @Test
     public void policy_with_total_sums_criteria() {
         PremiumCalculator calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
-        PolicyObjectItem tv = itemBuilder
-                .withName("TV")
-                .withSumInsured(new BigDecimal("104.45"))
-                .withRiskType(RiskType.FIRE)
-                .build();
-        PolicyObjectItem blender = itemBuilder
-                .reset()
-                .withName("Blender")
-                .withSumInsured(new BigDecimal("8.06"))
-                .withRiskType(RiskType.THEFT)
-                .build();
-        PolicyObject house = objectBuilder
-                .withName("House")
-                .withItem(tv)
-                .withItem(blender)
-                .build();
-        PolicyObjectItem bicycle = itemBuilder
-                .reset()
-                .withName("Bicycle")
-                .withSumInsured(new BigDecimal("395.55"))
-                .withRiskType(RiskType.FIRE)
-                .build();
-        PolicyObjectItem chainsaw = itemBuilder
-                .reset()
-                .withName("Chainsaw")
-                .withSumInsured(new BigDecimal("94.45"))
-                .withRiskType(RiskType.THEFT)
-                .build();
-        PolicyObject garage = objectBuilder
-                .reset()
-                .withName("Garage")
-                .withItem(bicycle)
-                .withItem(chainsaw)
-                .build();
         Policy policy = policyBuilder
                 .withNumber("LV20-02-100000-5")
                 .withStatus(PolicyStatus.REGISTERED)
-                .withObject(house)
-                .withObject(garage)
+                .withObject(objectBuilder
+                        .withName("House")
+                        .withFireRiskItem("TV", new BigDecimal("104.45"))
+                        .withTheftRiskItem("Blender", new BigDecimal("8.06"))
+                        .build())
+                .withObject(objectBuilder.reset()
+                        .withName("Garage")
+                        .withFireRiskItem("Bicycle", new BigDecimal("395.55"))
+                        .withTheftRiskItem("Chainsaw", new BigDecimal("94.45"))
+                        .build())
                 .build();
 
         BigDecimal calculatedPremium = calculator.calculate(policy);

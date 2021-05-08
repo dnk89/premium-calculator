@@ -1,6 +1,11 @@
 import com.theinsurancecompany.premiumcalc.*;
+import com.theinsurancecompany.premiumcalc.config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 
@@ -8,15 +13,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { SpringConfig.class })
 public class PremiumCalculatorTests {
 
+    @Autowired
     private PremiumCalculator calculator;
+
     private Policy.Builder policyBuilder;
     private PolicyObject.Builder objectBuilder;
 
     @BeforeEach
     public void init() {
-        calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
         policyBuilder = new Policy.Builder();
         objectBuilder = new PolicyObject.Builder();
     }

@@ -1,8 +1,11 @@
 package com.theinsurancecompany.premiumcalc;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class DefaultConcreteRiskPremiumCalculatorFactory implements ConcreteRiskPremiumCalculatorFactory {
     private final Map<RiskType, PremiumCalculator> calculators = new HashMap<>();
 

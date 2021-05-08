@@ -11,20 +11,33 @@ public class PremiumCalculatorTests {
 
     private Policy.Builder policyBuilder;
     private PolicyObject.Builder objectBuilder;
+    private PolicyObjectItem.Builder itemBuilder;
 
     @BeforeEach
     public void init() {
         policyBuilder = new Policy.Builder();
         objectBuilder = new PolicyObject.Builder();
+        itemBuilder = new PolicyObjectItem.Builder();
     }
 
     @Test
     public void policy_with_one_object_and_two_sub_objects_criteria() {
         PremiumCalculator calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
+        PolicyObjectItem tv = itemBuilder
+                .withName("TV")
+                .withSumInsured(new BigDecimal("100.00"))
+                .withRiskType(RiskType.FIRE)
+                .build();
+        PolicyObjectItem refrigerator = itemBuilder
+                .reset()
+                .withName("Refrigerator")
+                .withSumInsured(new BigDecimal("8.00"))
+                .withRiskType(RiskType.THEFT)
+                .build();
         PolicyObject house = objectBuilder
                 .withName("House")
-                .withItem(new PolicyObjectItem("TV", new BigDecimal("100.00"), RiskType.FIRE))
-                .withItem(new PolicyObjectItem("Refrigerator", new BigDecimal("8.00"), RiskType.THEFT))
+                .withItem(tv)
+                .withItem(refrigerator)
                 .build();
         Policy policy = policyBuilder
                 .withNumber("LV20-02-100000-5")
@@ -40,16 +53,39 @@ public class PremiumCalculatorTests {
     @Test
     public void policy_with_total_sums_criteria() {
         PremiumCalculator calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
+        PolicyObjectItem tv = itemBuilder
+                .withName("TV")
+                .withSumInsured(new BigDecimal("104.45"))
+                .withRiskType(RiskType.FIRE)
+                .build();
+        PolicyObjectItem blender = itemBuilder
+                .reset()
+                .withName("Blender")
+                .withSumInsured(new BigDecimal("8.06"))
+                .withRiskType(RiskType.THEFT)
+                .build();
         PolicyObject house = objectBuilder
                 .withName("House")
-                .withItem(new PolicyObjectItem("TV", new BigDecimal("104.45"), RiskType.FIRE))
-                .withItem(new PolicyObjectItem("Blender", new BigDecimal("8.06"), RiskType.THEFT))
+                .withItem(tv)
+                .withItem(blender)
+                .build();
+        PolicyObjectItem bicycle = itemBuilder
+                .reset()
+                .withName("Bicycle")
+                .withSumInsured(new BigDecimal("395.55"))
+                .withRiskType(RiskType.FIRE)
+                .build();
+        PolicyObjectItem chainsaw = itemBuilder
+                .reset()
+                .withName("Chainsaw")
+                .withSumInsured(new BigDecimal("94.45"))
+                .withRiskType(RiskType.THEFT)
                 .build();
         PolicyObject garage = objectBuilder
                 .reset()
                 .withName("Garage")
-                .withItem(new PolicyObjectItem("Bicycle", new BigDecimal("395.55"), RiskType.FIRE))
-                .withItem(new PolicyObjectItem("Chainsaw", new BigDecimal("94.45"), RiskType.THEFT))
+                .withItem(bicycle)
+                .withItem(chainsaw)
                 .build();
         Policy policy = policyBuilder
                 .withNumber("LV20-02-100000-5")

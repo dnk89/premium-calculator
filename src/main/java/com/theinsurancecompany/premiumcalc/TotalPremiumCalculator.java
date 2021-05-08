@@ -1,3 +1,5 @@
+package com.theinsurancecompany.premiumcalc;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.stream.Stream;

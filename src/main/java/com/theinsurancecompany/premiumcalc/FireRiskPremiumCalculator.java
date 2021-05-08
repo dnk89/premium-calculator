@@ -1,3 +1,5 @@
+package com.theinsurancecompany.premiumcalc;
+
 import java.math.BigDecimal;
 
 public class FireRiskPremiumCalculator extends ConcreteRiskPremiumCalculatorBase {

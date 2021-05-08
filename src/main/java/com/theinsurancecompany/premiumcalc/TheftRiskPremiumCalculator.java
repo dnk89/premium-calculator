@@ -1,8 +1,10 @@
+package com.theinsurancecompany.premiumcalc;
+
 import java.math.BigDecimal;
 
 public class TheftRiskPremiumCalculator extends ConcreteRiskPremiumCalculatorBase {
 
-    protected TheftRiskPremiumCalculator() {
+    public TheftRiskPremiumCalculator() {
         super(RiskType.THEFT);
     }
 

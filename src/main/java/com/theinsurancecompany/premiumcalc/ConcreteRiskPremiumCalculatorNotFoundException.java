@@ -1,3 +1,5 @@
+package com.theinsurancecompany.premiumcalc;
+
 public class ConcreteRiskPremiumCalculatorNotFoundException extends RuntimeException {
     public ConcreteRiskPremiumCalculatorNotFoundException(RiskType riskType) {
         super(getExceptionMessage(riskType));

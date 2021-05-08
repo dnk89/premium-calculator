@@ -1,3 +1,5 @@
+package com.theinsurancecompany.premiumcalc;
+
 import java.math.BigDecimal;
 
 public class PolicyObjectItem {
@@ -25,9 +27,9 @@ public class PolicyObjectItem {
     }
 
     public static class Builder {
-        private static final String EMPTY_NAME_MESSAGE = "Policy object item's name can't be empty.";
-        private static final String SUM_INSURED_NOT_SET_MESSAGE = "Policy object item's sum insured should be set.";
-        private static final String RISK_TYPE_NOT_SET_MESSAGE = "Policy object item's risk type should be set.";
+        private static final String EMPTY_NAME_MESSAGE = "com.theinsurancecompany.premiumcalc.Policy object item's name can't be empty.";
+        private static final String SUM_INSURED_NOT_SET_MESSAGE = "com.theinsurancecompany.premiumcalc.Policy object item's sum insured should be set.";
+        private static final String RISK_TYPE_NOT_SET_MESSAGE = "com.theinsurancecompany.premiumcalc.Policy object item's risk type should be set.";
 
         private String name;
         private BigDecimal sumInsured;

@@ -1,3 +1,5 @@
+package com.theinsurancecompany.premiumcalc;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +24,7 @@ public class PolicyObject {
     }
 
     public static class Builder {
-        private static final String EMPTY_NAME_MESSAGE = "Policy object's name can't be empty.";
+        private static final String EMPTY_NAME_MESSAGE = "com.theinsurancecompany.premiumcalc.Policy object's name can't be empty.";
 
         private String name;
         private List<PolicyObjectItem> items = new ArrayList<>();

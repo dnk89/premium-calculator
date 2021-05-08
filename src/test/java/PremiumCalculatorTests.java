@@ -9,18 +9,19 @@ import static org.hamcrest.Matchers.is;
 
 public class PremiumCalculatorTests {
 
+    private PremiumCalculator calculator;
     private Policy.Builder policyBuilder;
     private PolicyObject.Builder objectBuilder;
 
     @BeforeEach
     public void init() {
+        calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
         policyBuilder = new Policy.Builder();
         objectBuilder = new PolicyObject.Builder();
     }
 
     @Test
     public void policy_with_one_object_and_two_sub_objects_criteria() {
-        PremiumCalculator calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
         Policy policy = policyBuilder
                 .withNumber("LV20-02-100000-5")
                 .withStatus(PolicyStatus.REGISTERED)
@@ -38,7 +39,6 @@ public class PremiumCalculatorTests {
 
     @Test
     public void policy_with_total_sums_criteria() {
-        PremiumCalculator calculator = new TotalPremiumCalculator(new DefaultConcreteRiskPremiumCalculatorFactory());
         Policy policy = policyBuilder
                 .withNumber("LV20-02-100000-5")
                 .withStatus(PolicyStatus.REGISTERED)

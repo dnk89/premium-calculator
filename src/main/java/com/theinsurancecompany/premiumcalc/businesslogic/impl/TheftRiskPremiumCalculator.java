@@ -1,9 +1,11 @@
 package com.theinsurancecompany.premiumcalc.businesslogic.impl;
 
 import com.theinsurancecompany.premiumcalc.domain.RiskType;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
+@Component
 class TheftRiskPremiumCalculator extends ConcreteRiskPremiumCalculatorBase {
 
     public TheftRiskPremiumCalculator() {

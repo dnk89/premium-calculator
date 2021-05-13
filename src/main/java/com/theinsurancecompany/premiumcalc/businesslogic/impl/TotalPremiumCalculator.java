@@ -3,6 +3,7 @@ package com.theinsurancecompany.premiumcalc.businesslogic.impl;
 import com.theinsurancecompany.premiumcalc.domain.Policy;
 import com.theinsurancecompany.premiumcalc.businesslogic.PremiumCalculator;
 import com.theinsurancecompany.premiumcalc.domain.RiskType;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.math.RoundingMode;
 import java.util.stream.Stream;
 
 @Component
+@Primary
 class TotalPremiumCalculator implements PremiumCalculator {
 
     private ConcreteRiskPremiumCalculatorFactory concreteRiskPremiumCalculatorFactory;

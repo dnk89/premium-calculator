@@ -1,5 +1,8 @@
-import com.theinsurancecompany.premiumcalc.*;
+import com.theinsurancecompany.premiumcalc.businesslogic.PremiumCalculator;
 import com.theinsurancecompany.premiumcalc.config.SpringConfig;
+import com.theinsurancecompany.premiumcalc.domain.Policy;
+import com.theinsurancecompany.premiumcalc.domain.PolicyObject;
+import com.theinsurancecompany.premiumcalc.domain.PolicyStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

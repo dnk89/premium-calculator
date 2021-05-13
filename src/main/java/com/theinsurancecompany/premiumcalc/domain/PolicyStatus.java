@@ -1,4 +1,4 @@
-package com.theinsurancecompany.premiumcalc;
+package com.theinsurancecompany.premiumcalc.domain;
 
 public enum PolicyStatus {
     REGISTERED,

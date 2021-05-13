@@ -1,8 +1,10 @@
-package com.theinsurancecompany.premiumcalc;
+package com.theinsurancecompany.premiumcalc.businesslogic.impl;
+
+import com.theinsurancecompany.premiumcalc.domain.RiskType;
 
 import java.math.BigDecimal;
 
-public class TheftRiskPremiumCalculator extends ConcreteRiskPremiumCalculatorBase {
+class TheftRiskPremiumCalculator extends ConcreteRiskPremiumCalculatorBase {
 
     public TheftRiskPremiumCalculator() {
         super(RiskType.THEFT);

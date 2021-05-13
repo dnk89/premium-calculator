@@ -1,4 +1,4 @@
-package com.theinsurancecompany.premiumcalc;
+package com.theinsurancecompany.premiumcalc.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,9 +29,9 @@ public class Policy {
     }
 
     public static class Builder {
-        private static final String EMPTY_NUMBER_MESSAGE = "com.theinsurancecompany.premiumcalc.Policy number can't be empty.";
-        private static final String EMPTY_OBJECTS_MESSAGE = "com.theinsurancecompany.premiumcalc.Policy should contain at least one object.";
-        private static final String STATUS_NOT_SET_MESSAGE = "com.theinsurancecompany.premiumcalc.Policy status should be set";
+        private static final String EMPTY_NUMBER_MESSAGE = "com.theinsurancecompany.premiumcalc.domain.Policy number can't be empty.";
+        private static final String EMPTY_OBJECTS_MESSAGE = "com.theinsurancecompany.premiumcalc.domain.Policy should contain at least one object.";
+        private static final String STATUS_NOT_SET_MESSAGE = "com.theinsurancecompany.premiumcalc.domain.Policy status should be set";
 
         private String number;
         private PolicyStatus status;

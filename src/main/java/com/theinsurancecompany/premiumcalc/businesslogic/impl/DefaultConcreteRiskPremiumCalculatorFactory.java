@@ -1,12 +1,15 @@
-package com.theinsurancecompany.premiumcalc;
+package com.theinsurancecompany.premiumcalc.businesslogic.impl;
 
+import com.theinsurancecompany.premiumcalc.businesslogic.ConcreteRiskPremiumCalculatorNotFoundException;
+import com.theinsurancecompany.premiumcalc.businesslogic.PremiumCalculator;
+import com.theinsurancecompany.premiumcalc.domain.RiskType;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class DefaultConcreteRiskPremiumCalculatorFactory implements ConcreteRiskPremiumCalculatorFactory {
+class DefaultConcreteRiskPremiumCalculatorFactory implements ConcreteRiskPremiumCalculatorFactory {
     private final Map<RiskType, PremiumCalculator> calculators = new HashMap<>();
 
     public DefaultConcreteRiskPremiumCalculatorFactory() {

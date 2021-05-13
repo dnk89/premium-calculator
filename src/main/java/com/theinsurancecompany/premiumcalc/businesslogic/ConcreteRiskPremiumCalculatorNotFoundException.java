@@ -1,4 +1,6 @@
-package com.theinsurancecompany.premiumcalc;
+package com.theinsurancecompany.premiumcalc.businesslogic;
+
+import com.theinsurancecompany.premiumcalc.domain.RiskType;
 
 public class ConcreteRiskPremiumCalculatorNotFoundException extends RuntimeException {
     public ConcreteRiskPremiumCalculatorNotFoundException(RiskType riskType) {

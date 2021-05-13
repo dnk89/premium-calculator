@@ -1,8 +1,13 @@
-package com.theinsurancecompany.premiumcalc;
+package com.theinsurancecompany.premiumcalc.businesslogic.impl;
+
+import com.theinsurancecompany.premiumcalc.domain.Policy;
+import com.theinsurancecompany.premiumcalc.domain.PolicyObjectItem;
+import com.theinsurancecompany.premiumcalc.businesslogic.PremiumCalculator;
+import com.theinsurancecompany.premiumcalc.domain.RiskType;
 
 import java.math.BigDecimal;
 
-public abstract class ConcreteRiskPremiumCalculatorBase implements PremiumCalculator {
+abstract class ConcreteRiskPremiumCalculatorBase implements PremiumCalculator {
 
     private final RiskType riskType;
 

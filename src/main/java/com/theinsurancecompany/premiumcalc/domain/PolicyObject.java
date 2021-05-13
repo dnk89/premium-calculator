@@ -24,7 +24,7 @@ public class PolicyObject {
     }
 
     public static class Builder {
-        private static final String EMPTY_NAME_MESSAGE = "com.theinsurancecompany.premiumcalc.domain.Policy object's name can't be empty.";
+        private static final String EMPTY_NAME_MESSAGE = "Policy object's name can't be empty.";
 
         private String name;
         private List<PolicyObjectItem> items = new ArrayList<>();
